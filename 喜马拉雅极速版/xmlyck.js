@@ -24,7 +24,7 @@ async function getCookie() {
         let queires = getQueries(decodeURIComponent($request.body));
         // 处理需要的数据
         let ckName = "xmlyjsbck";
-        let [userId,] = headers?.cookie?.match(/appIdentifier=.+?;/g) ?? [];
+        let [userId,] = Headers?.cookie?.match(/appIdentifier=.+?;/g) ?? [];
         let token = Headers["cookie"]
 
         $.info("ckName：" + ckName)
