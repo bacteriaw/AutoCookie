@@ -50,16 +50,10 @@ let thank = `\n感谢 群友 的投稿\n`
 
 
 async function start() {
-    console.log("\n开始 查询");
     await userinfo();
     await $.wait(2 * 1000);
-
-    console.log("\n开始 签到");
     await signin();
     await $.wait(2 * 1000);
-
-
-
 }
 
 //-------------------用户信息查询----HTTP POST
@@ -77,10 +71,10 @@ async function userinfo() {
 
         //console.log(result);
         if (result?.error_code == 0) {
-            DoubleLog(`账号[${$.index}] 余额:${result?.data.userInfo.yuE} 金币:${result?.data.userInfo.jinBi} `);
+            DoubleLog(`[${$.index}] ${result?.data.userInfo.yuE} ${result?.data.userInfo.jinBi} `);
             await wait(3);
         } else {
-            DoubleLog(`账号[${$.index}] 余额:查询失败，登录过期`);
+            DoubleLog(`[${$.index}] 余额:查询失败，登录过期`);
             console.log(result);
         }
     } catch (error) {
@@ -240,12 +234,12 @@ async function SendMsg(message) {
 function DoubleLog(data) {
     if ($.isNode()) {
         if (data) {
-            console.log(`    ${data}`);
-            msg += `\n    ${data}`;
+            console.log(`${data}`);
+            msg += `\n${data}`;
         }
     } else {
-        console.log(`    ${data}`);
-        msg += `\n    ${data}`;
+        console.log(`${data}`);
+        msg += `\n${data}`;
     }
 
 }
