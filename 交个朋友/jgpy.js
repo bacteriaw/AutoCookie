@@ -3,7 +3,7 @@
 #!desc=jgpy by @arka
 
 [Script]
-交个朋友上传青龙 = type=http-response, pattern=^https:\/\/m\.ximalaya\.com\/speed\/web-earn\/account\/coin, script-path=https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E5%88%B8%E5%A6%88%E5%A6%88/qmm..js, requires-body=true, max-size=-1, timeout=300
+交个朋友上传青龙 = type=http-response, pattern=^https:\/\/m\.ximalaya\.com\/speed\/web-earn\/account\/coin, script-path=https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E4%BA%A4%E4%B8%AA%E6%9C%8B%E5%8F%8B/jgpy.js, requires-body=true, max-size=-1, timeout=300
 
 [MITM]
 hostname = %APPEND% m.ximalaya.com
