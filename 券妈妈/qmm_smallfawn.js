@@ -12,11 +12,12 @@
 const { log } = require("console");
 
 const $ = new Env("券妈妈");
+$.index = 1;
 const notify = $.isNode() ? require("./sendNotify") : "";
 const Notify = 1 		//0为关闭通知,1为打开通知,默认为1
 const debug = 0			//0为关闭调试,1为打开调试,默认为0
 //---------------------------------------------------------------------------------------------------------
-let ckStr = ($.isNode() ? process.env.qmm : $.getdata('qmm')) || '';
+let ckStr = ($.isNode() ? process.env.qmm_data : $.getdata('qmm_data')) || '';
 let msg, ck;
 let ck_status = true;
 let host = 'app.quanmama.com';
@@ -35,7 +36,8 @@ let thank = `\n感谢 群友 的投稿\n`
     let ckArr = await checkEnv(ckStr, "qmm");
     for (let index = 0; index < ckArr.length; index++) {
         let num = index + 1;
-        DoubleLog(`\n-------- 开始【第 ${num} 个账号】--------`);
+        $.index = num;
+        console.log(`\n-------- 开始【第 ${num} 个账号】--------`);
         ck = ckArr[index];
         debugLog(`【debug】 这是你第 ${num} 账号信息:\n ${ck}`);
         await start();
@@ -75,10 +77,10 @@ async function userinfo() {
 
         //console.log(result);
         if (result?.error_code == 0) {
-            DoubleLog(`当前用户余额为:${result?.data.userInfo.yuE} 🎉,当前金币为:${result?.data.userInfo.jinBi} `);
+            DoubleLog(`账号[${$.index}] 余额:${result?.data.userInfo.yuE} 金币:${result?.data.userInfo.jinBi} `);
             await wait(3);
         } else {
-            DoubleLog(`查询用户信息: 失败 ❌ 了呢,原因未知!`);
+            DoubleLog(`账号[${$.index}] 余额:查询失败，登录过期`);
             console.log(result);
         }
     } catch (error) {
@@ -107,10 +109,10 @@ async function signin() {
 
         //console.log(result);
         if (result?.IsSigned == "True") {
-            DoubleLog(`签到成功,当前已签到:${result.SerialDays}天 🎉 /n`);
+            console.log(`签到成功,当前已签到:${result.SerialDays}天 🎉 `);
             await wait(3);
         } else {
-            DoubleLog(`签到: 失败 ❌ 了呢,原因未知!`);
+            console.log(`签到: 失败 ❌ 了呢,原因未知!`);
             //console.log(result);
         }
     } catch (error) {
@@ -143,7 +145,7 @@ async function timing() {
             }
             await wait(3);
         } else {
-            DoubleLog(`当前时间段领取定时奖励: 失败 ❌ 了呢,原因未知!`);
+            console.log(`当前时间段领取定时奖励: 失败 ❌ 了呢,原因未知!`);
             console.log(result);
         }
     } catch (error) {
