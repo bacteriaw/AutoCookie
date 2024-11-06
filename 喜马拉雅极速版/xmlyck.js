@@ -3,7 +3,7 @@
 #!desc=xmlyjsbck by @arka
 
 [Script]
-喜马拉雅极速版获取ck = type=http-request, pattern=^https:\/\/m\.ximalaya\.com\/speed\/web-earn\/account\/coin, script-path=https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E5%88%B8%E5%A6%88%E5%A6%88/qmm..js, requires-body=true, max-size=-1, timeout=300
+喜马拉雅极速版获取ck = type=http-request, pattern=^https:\/\/m\.ximalaya\.com\/speed\/web-earn\/account\/coin, script-path=https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E5%96%9C%E9%A9%AC%E6%8B%89%E9%9B%85%E6%9E%81%E9%80%9F%E7%89%88/xmlyck.js, requires-body=true, max-size=-1, timeout=300
 
 [MITM]
 hostname = %APPEND% m.ximalaya.com
