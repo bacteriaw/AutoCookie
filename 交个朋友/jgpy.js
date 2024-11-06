@@ -23,7 +23,7 @@ async function getCookie() {
         let Headers=ObjectKeys2LowerCase($request.headers);
         let Body=$.toObj($response.body)
         // 处理需要的数据
-        let ckName = "jbpy";
+        let ckName = "jgpy";
         let userId = Body?.userId
         let token = Headers["authorization"]
 
