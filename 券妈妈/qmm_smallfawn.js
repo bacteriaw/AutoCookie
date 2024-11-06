@@ -17,7 +17,7 @@ const notify = $.isNode() ? require("./sendNotify") : "";
 const Notify = 1 		//0为关闭通知,1为打开通知,默认为1
 const debug = 0			//0为关闭调试,1为打开调试,默认为0
 //---------------------------------------------------------------------------------------------------------
-let ckStr = ($.isNode() ? process.env.qmm_data : $.getdata('qmm_data')) || '';
+let ckStr = ($.isNode() ? process.env.qmm : $.getdata('qmm')) || '';
 let msg, ck;
 let ck_status = true;
 let host = 'app.quanmama.com';
