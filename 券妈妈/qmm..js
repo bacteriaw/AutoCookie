@@ -1,6 +1,6 @@
 /*
 #!name=券妈妈
-#!desc=qmm by @sliverkiss
+#!desc=qmm by @arka
 
 [Script]
 # 调试专用
