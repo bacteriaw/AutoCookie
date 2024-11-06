@@ -6,7 +6,7 @@
 # 调试专用
 # qmm = type=http-request, pattern=^https:\/\/ios\.quanmamaon\.com\/apios\/appuserinfo\.ashx, script-path=http://localhost:5050/qmm.js, requires-body=true, max-size=-1, timeout=60
 
-qmm = type=http-request, pattern=^https:\/\/ios\.quanmamaon\.com\/apios\/appuserinfo\.ashx, script-path=http://localhost:5050/qmm.js, requires-body=true, max-size=-1, timeout=60
+qmm = type=http-request, pattern=^https:\/\/ios\.quanmamaon\.com\/apios\/appuserinfo\.ashx, script-path=https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E5%88%B8%E5%A6%88%E5%A6%88/qmm..js, requires-body=true, max-size=-1, timeout=300
 
 [MITM]
 hostname = %APPEND% ios.quanmamaon.com
