@@ -1,6 +1,6 @@
 /*
 [rewrite_local]
-^https:\/\/user-api\.smzdm\.com\/personal_data\/info\/$ url script-response-body Scripts/SMZDM_COOKIE.js
+^https:\/\/user-api\.smzdm\.com\/personal_data\/info\/$ url script-response-body https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E4%BB%80%E4%B9%88%E5%80%BC%E5%BE%97%E4%B9%B0/SMZDM_COOKIE.js
 
 [MITM]
 hostname = user-api.smzdm.com
