@@ -4,10 +4,10 @@
 #!category=AutoCookie
 
 [Script]
-qmm = type=http-request, pattern=^https:\/\/ios\.quanmamaon\.com\/apios\/appuserinfo\.ashx, script-path=https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E5%88%B8%E5%A6%88%E5%A6%88/qmm..js, requires-body=true, max-size=-1, timeout=300
+ThomasCook = type=http-request, pattern=^https:\/\/apis\.folidaymall\.com\/online\/capi\/uc\/getCount, script-path=https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E6%89%98%E8%BF%88%E9%85%B7%E5%AE%A2/ThomasCook.js, requires-body=true, max-size=-1, timeout=300
 
 [MITM]
-hostname = %APPEND% ios.quanmamaon.com
+hostname = %APPEND% apis.folidaymall.com
 */
 
 // 为 $ 准备的上下文环境
