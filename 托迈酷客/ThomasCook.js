@@ -21,7 +21,7 @@ const $ = new Env(moduleName);
 async function getCookie() {
     try {
         if ($request && $request.method === 'OPTIONS') return;
-        let Headers=ObjectKeys2LowerCase($request.headers);
+        let headers=ObjectKeys2LowerCase($request.headers);
         let [,data]=headers["authorization"].split(" ");
         data=parseJwt(data);
         let tokenJson=$.toObj(data?.payload?.tokenJson);
