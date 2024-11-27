@@ -4,7 +4,7 @@
 #!category=AutoCookie
 
 [Script]
-ThomasCook = type=http-request, pattern=^https:\/\/game\.dominos\.com\.cn\/.+\/game\/myPrize\?openid=, script-path=https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E6%89%98%E8%BF%88%E9%85%B7%E5%AE%A2/ThomasCook.js, requires-body=true, max-size=-1, timeout=300
+ThomasCook = type=http-request, pattern=^https:\/\/game\.dominos\.com\.cn\/.+\/game\/myPrize\?openid=, script-path=https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E8%BE%BE%E7%BE%8E%E4%B9%90%E6%8A%AB%E8%90%A8/dlm.js, requires-body=true, max-size=-1, timeout=300
 
 [MITM]
 hostname = %APPEND% game.dominos.com.cn
