@@ -18,7 +18,7 @@ async function getCookie() {
     try {
         if ($request && $request.method === 'OPTIONS') return;
         let headers=ObjectKeys2LowerCase($request.headers);
-        let Body=$.toObj(data?.payload?.tokenJson);
+        let Body=$.toObj($response.body);
         // 处理需要的数据
         let ckName = "xmyx_data";
         let userId = Body?.data?.baseInfo?.fullName
