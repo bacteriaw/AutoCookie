@@ -4,47 +4,35 @@
 
 [MITM]
 hostname = www.feihevip.com
-
 */
+
 // 为 $ 准备的上下文环境
-const moduleName = "xmyx_data";
+const moduleName = "星妈优选";
 const $ = new Env(moduleName);
 /**
  * ===================================
  * 持久化属性: qlSync 公开的数据结构
  * ===================================
  */
-$.arguments = getArguments();
-// 存储`青龙域名`
-$.host = $.arguments?.host || "";
-$.clientId = $.arguments?.clientId || "";
-$.secret = $.arguments?.secret || "";
-$.ckName = $.arguments?.ckName || "";
-
-//主程序执行入口
-!(async () => {
-    try {
-        await getCookie();
-    } catch (e) {
-        throw e;
-    }
-})()
-    .catch((e) => { $.error(e), $.msg($.name, `⛔️ script run error!`, e.message || e) })
-    .finally(async () => {
-        $.done({});
-    });
-
-
 async function getCookie() {
     try {
         if ($request && $request.method === 'OPTIONS') return;
-        let headers = ObjectKeys2LowerCase($request.headers);
-        let Body = $.toObj($response.body);
-        if (!(headers['token'] && Body?.data?.basInfo?.fullName)) throw new Error("获取token失败！参数缺失");
+        let headers=ObjectKeys2LowerCase($request.headers);
+        let Body=$.toObj(data?.payload?.tokenJson);
+        // 处理需要的数据
+        let ckName = "xmyx_data";
+        let userId = Body?.data?.baseInfo?.fullName
+        let token = headers["token"];
+
+        $.info("ckName：" + ckName)
+        $.info("userId：" + userId)
+        $.info("token：" + token)
+
+        if (!(userId && token)) throw new Error("获取token失败！参数缺失");
         //上传ck
-        await refreshQingLong("xmyx_data", headers['token'], Body?.data?.basInfo?.fullName);
+        await refreshQingLong(ckName, token, userId);
     } catch (e) {
-        //await refreshQingLong("xmyx_data");
+        throw e;
     }
 }
 
@@ -53,56 +41,22 @@ async function getCookie() {
  * 处理同步数据
  * ===================================
  */
-async function refreshQingLong(ckName, ckVal, remarks) {
-    try {
-        if (!($.host && $.clientId && $.secret && ckName)) throw new Error("请先在boxjs填写相关配置");
-        let o = await loadQingLong({
-            host: $.host,
-            clientId: $.clientId,
-            secret: $.secret
-        });
-        await o.checkLogin();
-        await o.getEnvs();
-        let ckList = o.selectEnvByName(ckName) ?? [];
-        let i = ckList.find(e => e.remarks == remarks);
-        //读取boxjs中的变量
-        $.ckVal = ckVal || $.getdata(ckName);
-        $.info(`获取变量:${ckName}`);
-        $.info(`同步内容:${$.ckVal}`);
-        if (!$.ckVal) throw new Error(`${ckName}所对应的值不存在，同步失败`);
-        //如果存在则更新数据，否则添加
-        $.info(`开始尝试同步到青龙...`);
-        $.info(`同步前:${i?.value}`);
-        try {
-            if (i) {
-                await o.updateEnv({
-                    value: `${$.ckVal}`,
-                    name: ckName,
-                    remarks: `${i?.remarks}`,
-                    id: `${i?.id}`
-                });
-            } else {
-                await o.addEnv([{ value: `${$.ckVal}`, name: ckName, remarks: `${remarks}` }])
-            }
-        } catch (e) {
 
-        } finally {
-            $.msg($.name, "", "✅ The environment variable was uploaded successfully.");
-        }
-    } catch (e) {
-        throw e;
-    }
-}
+// 主程序执行入口
+!(async () => await getCookie())()
+    .catch((e) => { $.error(e), $.msg($.name, `⛔️ script run error!`, e.message || e) })
+    .finally(async () => $.done({}));
+
 /**
  * ===================================
- * 获取基础数据
+ * 固定函数区域
  * ===================================
  */
-
-
+ //jwt解析
+function parseJwt(t) { const e = t.split("."); if (3 !== e.length) throw new Error("Invalid JWT token"); const a = JSON.parse(o(e[0])), r = JSON.parse(o(e[1])), n = new Date(1e3 * r.exp), p = new Date(parseInt(r.create_date)); return { header: a, payload: r, expDate: g(n), createDate: g(p) }; function o(t) { let e = t.replace(/-/g, "+").replace(/_/g, "/"), a = e.length % 4; a && (e += "=".repeat(4 - a)); const r = atob(e); return decodeURIComponent(escape(r)) } function g(t) { return `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")} ${String(t.getHours()).padStart(2, "0")}:${String(t.getMinutes()).padStart(2, "0")}:${String(t.getSeconds()).padStart(2, "0")}` } }
 // prettier-ignore
-//获取surge模块/loon插件参数
-function getArguments() { let t; return t = "undefined" != typeof $argument ? $.isLoon() ? $argument : Object.fromEntries($argument.split("&").map((t => t.split("=")))) : {}, $.info(`传入的 $argument: ${$.toStr(t)} `), t = { ...t, ...$.getjson("SAKURA_QL") }, $.info(`从持久化存储读取参数后: ${$.toStr(t)} `), t }
+function getQueries(e) { return e ? e.split("&").reduce(((e, r) => { var [t, r] = r.split("="); return e[t] = r, e }), {}) : {} }
+async function refreshQingLong(a, e, n) { try { const { host: t, clientId: r, secret: i } = $.getjson("SAKURA_QL"); if (!(t && r && i && a)) throw new Error("请先在boxjs填写相关配置"); let c = await loadQingLong({ host: t, clientId: r, secret: i }); await c.checkLogin(), await c.getEnvs(); let o = (c.selectEnvByName(a) ?? []).find((a => a.remarks == n)); if ($.ckVal = e || $.getdata(a), $.info(`获取变量:${a}`), $.info(`同步内容:${$.ckVal}`), !$.ckVal) throw new Error(`${a}所对应的值不存在，同步失败`); $.info("开始尝试同步到青龙..."), $.info(`同步前:${o?.value}`); try { o ? await c.updateEnv({ value: `${$.ckVal}`, name: a, remarks: `${o?.remarks}`, id: `${o?.id}` }) : await c.addEnv([{ value: `${$.ckVal}`, name: a, remarks: `${n}` }]) } catch (a) { } finally { $.msg($.name, "", "✅ The environment variable was uploaded successfully.") } } catch (a) { throw a } }
 //From yuheng's QingLong
 async function loadQingLong(QL) { let code = $.getdata("qinglong_code") || ""; return code && Object.keys(code).length ? ($.info("[QingLong] 模块加载成功,请继续"), eval(code), new QingLong(QL.host, QL.clientId, QL.secret)) : ($.info("[QingLong] 开始安装模块..."), new Promise((async resolve => { $.getScript("https://fastly.jsdelivr.net/gh/Sliverkiss/QuantumultX@main/Utils/QingLong.min.js").then((fn => { $.setdata(fn, "qinglong_code"), eval(fn); const ql = new QingLong(QL.host, QL.clientId, QL.secret); $.info("[QingLong] 模块加载成功,请继续"), resolve(ql) })) }))) }
 //From xream's ObjectKeys2LowerCase
