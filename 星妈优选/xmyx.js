@@ -1,6 +1,6 @@
 /*
 [rewrite_local]
-^https:\/\/www\.feihevip\.com\/api\/starMember\/getMemberInfo url script-response-body 
+^https:\/\/www\.feihevip\.com\/api\/starMember\/getMemberInfo url script-response-body https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E6%98%9F%E5%A6%88%E4%BC%98%E9%80%89/xmyx.js
 
 [MITM]
 hostname = www.feihevip.com
