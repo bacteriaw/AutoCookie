@@ -30,7 +30,7 @@ async function getCookie() {
 
         if (!(userId && token)) throw new Error("获取token失败！参数缺失");
         //上传ck
-        await refreshQingLong(ckName, token, userId);
+        await refreshQingLong(ckName, `${token}#${userId}`, userId);
     } catch (e) {
         throw e;
     }
