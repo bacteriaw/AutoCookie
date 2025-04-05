@@ -1,6 +1,6 @@
 /*
 [rewrite_local]
-^https:\/\/dm\.yeemiao\.com\/point\/getUserPointInfo url script-response-body 
+^https:\/\/dm\.yeemiao\.com\/point\/getUserPointInfo url script-response-body https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E5%B0%8F%E8%B1%86%E8%8B%97/xdm.js
 
 [MITM]
 hostname = dm.yeemiao.com
