@@ -18,7 +18,6 @@ async function getCookie() {
     try {
         if ($request && $request.method === 'OPTIONS') return;
         let headers=ObjectKeys2LowerCase($request.headers);
-        let Body=$.toObj($response.body);
         // 处理需要的数据
         let ckName = "xdm_data";
         let token = headers["token"];
