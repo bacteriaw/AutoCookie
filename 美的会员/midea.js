@@ -20,7 +20,7 @@ async function getCookie() {
         let Headers=ObjectKeys2LowerCase($request.headers);
         const { uid, skey } = extractValues(Headers["cookie"], ["uid", "skey"]) ?? {};
         if (!(uid && skey)) return;
-        let Body=$.toObj($respnse.body);
+        let Body=$.toObj($response.body);
         // 处理需要的数据
         let ckName = "midea_token";
         let userId = Body?.data?.mobile
