@@ -1,6 +1,6 @@
 /*
 [rewrite_local]
-^https:\/\/mcsp\.midea\.com\/api\/cms_bff\/mcsp-uc-mvip-bff\/member\/getProMemberInfo\.do url script-response-body 
+^https:\/\/mcsp\.midea\.com\/api\/cms_bff\/mcsp-uc-mvip-bff\/member\/getProMemberInfo\.do url script-response-body https://raw.githubusercontent.com/bacteriaw/AutoCookie/refs/heads/main/%E7%BE%8E%E7%9A%84%E4%BC%9A%E5%91%98/midea.js
 
 [MITM]
 hostname = mcsp.midea.com
