@@ -55,7 +55,7 @@ async function getCookie() {
  * ===================================
  */
  //匹配cookie取值
-const extractValues = (input, keys) => {
+function extractValues(input, keys){
     if (!input) return {};
     const regex = new RegExp(keys.map(key => `${key}=([^;]+)`).join(";.*?"));
     const match = input?.match(regex);
